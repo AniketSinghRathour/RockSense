@@ -1,0 +1,15 @@
+<h1>Upload here</h1>
+
+{% comment %} <form action="" method="post" enctype+"mutipart/form-data">
+    {% csrf_token %}
+    
+    <label class="tag_label" for="{{form.photos}}">Upload Image</label>
+    {{form.photos}}
+    <button type="submit">Identify</button>
+</form> {% endcomment %}
+
+<form action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button type="submit">Upload</button>
+</form>

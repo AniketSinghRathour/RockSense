@@ -1,0 +1,24 @@
+{% comment %} <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Uploaded Rock Sample</title>
+</head>
+<body>
+    <h2>Uploaded Rock Sample</h2>
+    {% if image %}
+        <img src="{{ image.photos.url }}" alt="Rock Sample">
+    {% else %}
+        <p>No image uploaded.</p>
+    {% endif %}
+</body>
+</html> {% endcomment %}
+
+<h1>Processed Image</h1>
+<img src="data:image/png;base64,{{ processed_image }}" alt="Processed Image">
+
+<h2>Pixel Intensity Histogram</h2>
+<img src="data:image/png;base64,{{ histogram }}" alt="Histogram">
+
+<h2>Center Row Intensity Profile</h2>
+<img src="data:image/png;base64,{{ profile_chart }}" alt="Intensity Profile">

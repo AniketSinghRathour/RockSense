@@ -1,0 +1,118 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RockSense - Rock Analysis</title>
+    {% comment %} <link rel="stylesheet" href="style.css"> {% endcomment %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="spline-background">
+        <iframe src='https://my.spline.design/3dpathslines1copy-5bbc2afa7a76da8e9ec00fa80bf9cf4e/' frameborder='0' width='100%' height='100%'></iframe>
+    </div>
+    <nav class="navbar">
+        <div class="nav-logo">
+            <img src="https://api.iconify.design/lucide:gem.svg" alt="RockSense Logo" class="logo-icon">
+            <span>RockSense</span>
+        </div>
+    </nav>
+
+    <div class="main-container">
+        <div class="upload-section">
+            <h2>Upload Rock Sample</h2>
+            <form action="{% url 'after' %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="upload-box" id="upload-box">                    <img src="https://api.iconify.design/lucide:upload.svg" alt="Upload" class="upload-icon">
+                    <p>Drag and drop your image here or click to browse</p>
+                    <label for="{{form.photos.img_label}}"></label>
+                    {% comment %} {{form.min_img}} {% endcomment %}
+                    <input type="file" name="image" id="file-input" accept="image/*" hidden required>
+                </div>
+                <div class="preview-box" id="preview-box" style="display: none;">
+                    <img id="preview-image" alt="Preview">
+                    <button class="remove-btn" id="remove-btn">Remove</button>
+                </div>
+                <button type="submit" class="identify-btn" id="identify-btn" >Analyze Rock</button>
+            </form>
+            
+        </div>
+
+        {% comment %} {% if output_url %}
+            
+            <img src="{{ output_url }}" />
+        {% else %}
+            <p>Image processing failed. Please try again.</p>
+        {% endif %} {% endcomment %}
+
+        {% comment %} <div class="analysis-container" id="analysis-container" style="display: none;">
+            <div class="rock-info">
+                <h2>Rock Analysis Results</h2>
+                <div class="info-grid">
+                    <div class="info-card">
+                        <h3>Rock Type</h3>
+                        <p id="rock-type">Granite</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>Classification</h3>
+                        <p id="classification">Igneous Rock</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>Chemical Formula</h3>
+                        <p id="formula">SiO₂ + Al₂O₃ + K₂O + Na₂O + CaO</p>
+                    </div>
+                </div>
+                <div class="description-card">
+                    <h3>Description</h3>
+                    <p id="description"></p>
+                </div>
+            </div>
+
+            <div class="visualization-grid">
+                <div class="chart-card">
+                    <h3>Mineral Composition</h3>
+                    <canvas id="compositionChart"></canvas>
+                </div>
+                <div class="chart-card">
+                    <h3>Grain Size Distribution</h3>
+                    <canvas id="grainSizeChart"></canvas>
+                </div>
+                <div class="chart-card">
+                    <h3>Spatial Distribution</h3>
+                    <canvas id="spatialChart"></canvas>
+                </div>
+                <div class="chart-card">
+                    <h3>3D Model</h3>
+                    <div class="model-container" id="model-container">
+                        <iframe id="rock-model" frameborder="0" allowfullscreen mozallowfullscreen="true"></iframe>
+                    </div>
+                </div>
+            </div>
+
+            <div class="locations-section">
+                <h3>Geographic Distribution</h3>
+                <div id="location-list" class="location-list"></div>
+            </div>
+
+            <div class="action-buttons">
+                <button id="download-btn" class="action-btn">
+                    <img src="https://api.iconify.design/lucide:download.svg" alt="Download" class="btn-icon">
+                    Download Report
+                </button>
+                <button id="share-btn" class="action-btn">
+                    <img src="https://api.iconify.design/lucide:share-2.svg" alt="Share" class="btn-icon">
+                    Share Analysis
+                </button>
+            </div>
+        </div> {% endcomment %}
+    </div>
+
+
+
+    {% comment %} <script src="identify.js"></script> {% endcomment %}
+    <script src="{% static 'identify.js' %}"></script>
+</body>
+</html>
